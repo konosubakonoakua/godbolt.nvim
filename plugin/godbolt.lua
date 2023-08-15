@@ -9,8 +9,8 @@ local function _2_(opts)
   return (require("godbolt.cmd")).godbolt(opts.line1, opts.line2, opts.bang, opts.fargs[1])
 end
 vim.api.nvim_create_user_command("GodboltCompiler", _2_, {bang = true, nargs = 1, complete = complete, range = "%"})
-if not (1 == vim.g.godbolt_loaded) then
-  vim.g.godbolt_loaded = 1
+if not (1 == vim.b.godbolt_loaded) then
+  vim.b.godbolt_loaded = 1
   _G.__godbolt_map = {}
   _G.__godbolt_exec_buf_map = {}
   _G.__godbolt_nsid = vim.api.nvim_create_namespace("godbolt")

@@ -40,11 +40,11 @@
   (let [stderr (icollect [k v (pairs response.stderr)] v.text)
         stdout (icollect [k v (pairs response.stdout)]
                  v.text)
-        lines [(.. "exit code: " response.code)]]
+        lines [(.. ">>>>>>>>>>>>>>>>>>>>>exit code: " response.code)]]
     ;; fill output buffer
-    (table.insert lines "stdout:")
+    (table.insert lines ">>>>>>>>>>>>>>>>>>>>>stdout:")
     (vim.list_extend lines stdout)
-    (table.insert lines "stderr:")
+    (table.insert lines ">>>>>>>>>>>>>>>>>>>>>stderr:")
     (vim.list_extend lines stderr)
     ;; display output window
     (let [exists (not= nil (. exec-buf-map source-buf))

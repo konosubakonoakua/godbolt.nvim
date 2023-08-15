@@ -47,10 +47,10 @@ local function display_output(response, source_buf, reuse_3f)
     end
     stdout = tbl_17_auto
   end
-  local lines = {("exit code: " .. response.code)}
-  table.insert(lines, "stdout:")
+  local lines = {(">>>>>>>>>>>>>>>>>>>>>exit code: " .. response.code)}
+  table.insert(lines, ">>>>>>>>>>>>>>>>>>>>>stdout:")
   vim.list_extend(lines, stdout)
-  table.insert(lines, "stderr:")
+  table.insert(lines, ">>>>>>>>>>>>>>>>>>>>>stderr:")
   vim.list_extend(lines, stderr)
   local exists = (nil ~= exec_buf_map[source_buf])
   local output_buf = prepare_buf(lines, source_buf, reuse_3f)

@@ -21,6 +21,10 @@ local function godbolt(begin, _end, reuse_3f, compiler)
   end
   local flags = vim.fn.input({prompt = "Flags: ", default = (options.userArguments or "")})
   do end (options)["userArguments"] = flags
+  local _args = vim.fn.input({prompt = "Args: ", default = ""})
+  local _stdin = vim.fn.input({prompt = "Stdin: ", default = ""})
+  local _executeParams = {args = _args, stdin = _stdin}
+  options["executeParameters"] = _executeParams
   local fuzzy_3f
   do
     local matches = false
