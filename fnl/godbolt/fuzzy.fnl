@@ -24,9 +24,7 @@
 ;; fnlfmt: skip
 (fn transform [entry]
   "Get the compiler id from the selected entry for telescope"
-  {:value (-> entry (vim.split " ") (first))
-   :display entry
-   :ordinal entry})
+  {:value (-> entry (vim.split " ") (first)) :display entry :ordinal entry})
 
 (fn fzf [entries begin end options exec reuse?]
   (let [maxlen (accumulate [current-maxlen -1 _ v (pairs entries)]
