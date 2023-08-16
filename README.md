@@ -11,19 +11,40 @@ Requires neovim 0.6 and curl
 You can call the setup function in your config to override these default values:
 
 ```lua
-require("godbolt").setup({
-    languages = {
-        cpp = { compiler = "g122", options = {} },
-        c = { compiler = "cg122", options = {} },
-        rust = { compiler = "r1650", options = {} },
-        -- any_additional_filetype = { compiler = ..., options = ... },
-    },
-    quickfix = {
-        enable = false, -- whether to populate the quickfix list in case of errors
-        auto_open = false -- whether to open the quickfix list in case of errors
-    },
-    url = "https://godbolt.org" -- can be changed to a different godbolt instance
-})
+return {
+  {
+    "konosubakonoakua/godbolt.nvim",
+    lazy = true,
+    init = function()
+      vim.b.godbolt_exec = 0
+
+      require("util").keymap("n", "<leader>;e", function()
+        if vim.b.godbolt_exec then
+          vim.b.godbolt_exec = 0
+          vim.notify("godbolt execute output disabled", vim.log.levels.WARN)
+        else
+          vim.b.godbolt_exec = 1
+          vim.notify("godbolt execute output enabled", vim.log.levels.WARN)
+        end
+      end)
+
+      require("godbolt").setup({
+        languages = {
+          cpp = { compiler = "g122", options = {} },
+          c = { compiler = "cg122", options = {} },
+          rust = { compiler = "r1650", options = {} },
+          -- any_additional_filetype = { compiler = ..., options = ... },
+        },
+        quickfix = {
+          enable = true, -- whether to populate the quickfix list in case of errors
+          auto_open = true, -- whether to open the quickfix list in case of errors
+        },
+        url = "https://godbolt.org", -- can be changed to a different godbolt instance
+      })
+    end,
+  },
+}
+
 ```
 
 If your neovim config is in lua then place this snippet in your config directly, otherwise place it inside a lua block like so:
